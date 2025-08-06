@@ -3,8 +3,8 @@ name: Deploy Glue Job
 on:
   push:
     paths:
-      - 'scripts/glue.py'
-      - '.github/workflows/deploy_glue.yml'
+      - 'scripts/etl.py'
+      - '.github/workflows/deploy.yml'
 
 jobs:
   deploy-glue-job:
