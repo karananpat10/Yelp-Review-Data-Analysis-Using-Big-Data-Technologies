@@ -25,7 +25,7 @@ jobs:
     - name: Upload ETL scripts to S3
       run: |
         echo "Uploading scripts to S3..."
-        aws s3 cp scripts/etl.py s3://gule-script-github/glue-scripts/etl.py --acl public-read
+        aws s3 cp scripts/etl.py s3://gule-script-github/glue-scripts/ --acl public-read
         echo "Upload complete."
 
     - name: Start AWS Glue job and log JobRunId
