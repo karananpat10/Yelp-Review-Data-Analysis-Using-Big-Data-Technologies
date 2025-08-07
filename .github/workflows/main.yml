@@ -1,0 +1,51 @@
+# .github/workflows/main.yml
+
+name: Deploy Glue Job and Crawler
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-south-1
+
+    - name: Upload ETL script to S3
+      run: |
+        aws s3 cp script.py s3://copy-script-file-to-s3-bucket-through-github-cicd/script/script.py
+
+    - name: Start Glue Job
+      id: start_job
+      run: |
+        JOB_RUN_ID=$(aws glue start-job-run --job-name yelp-glue-etl --query 'JobRunId' --output text)
+        echo "run_id=$JOB_RUN_ID" >> $GITHUB_OUTPUT
+
+    - name: Wait for Glue Job to complete
+      run: |
+        STATUS="RUNNING"
+        while [ "$STATUS" == "RUNNING" ] || [ "$STATUS" == "STARTING" ]; do
+          STATUS=$(aws glue get-job-run --job-name yelp-glue-etl --run-id ${{ steps.start_job.outputs.run_id }} --query 'JobRun.JobRunState' --output text)
+          echo "Status: $STATUS"
+          sleep 30
+        done
+
+        if [ "$STATUS" != "SUCCEEDED" ]; then
+          echo "Glue job failed with status $STATUS"
+          exit 1
+        fi
+
+    - name: Start Glue Crawler
+      run: |
+        aws glue start-crawler --name yelp-crawler
