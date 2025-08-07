@@ -1,5 +1,5 @@
 name: Deploy Glue Job
-#1
+
 on:
   push:
     paths:
@@ -52,4 +52,22 @@ jobs:
             exit 1
           fi
           sleep 30
+        done
+
+    - name: Start Glue Crawler
+      run: |
+        echo "Starting Glue Crawler..."
+        aws glue start-crawler --name new-crawler
+
+    - name: Wait for Crawler to finish
+      run: |
+        echo "Waiting for Glue Crawler to finish..."
+        while true; do
+          STATE=$(aws glue get-crawler --name new-crawler --query 'Crawler.State' --output text)
+          echo "Current Crawler State: $STATE"
+          if [[ "$STATE" == "READY" ]]; then
+            echo "Crawler completed successfully!"
+            break
+          fi
+          sleep 15
         done
