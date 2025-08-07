@@ -49,4 +49,4 @@ jobs:
 
     - name: Start Glue Crawler
       run: |
-        aws glue start-crawler --name my-crawler
+        aws glue start-crawler --name cdac-crawler
