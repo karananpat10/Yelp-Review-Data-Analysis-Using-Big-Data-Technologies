@@ -2,6 +2,8 @@ name: Deploy Glue Job
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'scripts/etl.py'
       - '.github/workflows/deploy.yml'
@@ -22,35 +24,37 @@ jobs:
         aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
         aws-region: us-east-1
 
-    - name: Upload ETL scripts to S3
+    - name: Upload ETL script to S3
       run: |
-        echo "Uploading scripts to S3..."
+        echo "Uploading etl.py to S3..."
         aws s3 cp scripts/etl.py s3://gule-script-github/glue-scripts/etl.py --acl public-read
         echo "Upload complete."
 
-    - name: Start AWS Glue job and log JobRunId
+    - name: Start AWS Glue Job
       id: start_job
       run: |
-        echo "Starting Glue Job..."
+        echo "Starting AWS Glue job..."
         JOB_RUN_ID=$(aws glue start-job-run --job-name Yelp-job --query 'JobRunId' --output text)
-        echo "JobRunId: $JOB_RUN_ID"
+        echo "Glue JobRunId: $JOB_RUN_ID"
         echo "job_run_id=$JOB_RUN_ID" >> $GITHUB_OUTPUT
 
-    - name: Wait for Glue job to finish
+    - name: Wait for Glue Job to Finish
       run: |
         JOB_RUN_ID=${{ steps.start_job.outputs.job_run_id }}
-        echo "Waiting for Glue Job ($JOB_RUN_ID) to finish..."
+        echo "Waiting for Glue job to finish..."
 
         while true; do
           STATUS=$(aws glue get-job-run --job-name Yelp-job --run-id $JOB_RUN_ID --query 'JobRun.JobRunState' --output text)
-          echo "Current Status: $STATUS"
+          echo "Current Glue Job Status: $STATUS"
+
           if [[ "$STATUS" == "SUCCEEDED" ]]; then
-            echo "Glue job succeeded!"
+            echo "Glue job completed successfully!"
             break
           elif [[ "$STATUS" == "FAILED" || "$STATUS" == "STOPPED" || "$STATUS" == "TIMEOUT" ]]; then
-            echo "Glue job failed or stopped with status: $STATUS"
+            echo "Glue job failed with status: $STATUS"
             exit 1
           fi
+
           sleep 30
         done
 
@@ -59,15 +63,18 @@ jobs:
         echo "Starting Glue Crawler..."
         aws glue start-crawler --name new-crawler
 
-    - name: Wait for Crawler to finish
+    - name: Wait for Glue Crawler to Finish
       run: |
         echo "Waiting for Glue Crawler to finish..."
+
         while true; do
           STATE=$(aws glue get-crawler --name new-crawler --query 'Crawler.State' --output text)
           echo "Current Crawler State: $STATE"
+
           if [[ "$STATE" == "READY" ]]; then
             echo "Crawler completed successfully!"
             break
           fi
+
           sleep 15
         done
