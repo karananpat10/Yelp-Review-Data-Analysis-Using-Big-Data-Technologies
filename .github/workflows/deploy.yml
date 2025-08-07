@@ -2,10 +2,8 @@ name: Deploy Glue Job
 
 on:
   push:
-    paths:
-      - 'scripts/etl.py'
-      - '.github/workflows/deploy.yml'
-
+    branches:
+      - feature/karan
 jobs:
   deploy-glue-job:
     runs-on: ubuntu-latest
