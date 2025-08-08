@@ -38,7 +38,7 @@ jobs:
       - name: Terraform Apply
         run: terraform -chdir=terraform apply -auto-approve
 
-      # Step 7: Upload ETL script to S3 bucket
+      # Step 7: Upload ETL script to S3 bucket.
       - name: Upload ETL Script to S3
         run: |
           aws s3 cp scripts/etl.py s3://myscriptdatakaran/scripts/etl.py
