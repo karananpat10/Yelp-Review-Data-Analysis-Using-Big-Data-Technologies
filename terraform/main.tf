@@ -31,7 +31,7 @@ resource "aws_glue_crawler" "etl_crawler" {
   database_name = aws_glue_catalog_database.etl_db.name
 
   s3_target {
-    path = "s3://${aws_s3_bucket.etl_bucket.bucket}/cleaned_data/"
+    path = "s3://glue-file-1/final-output/"
  }
 
   depends_on = [aws_glue_job.etl_job]

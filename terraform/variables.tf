@@ -20,5 +20,5 @@ variable "glue_crawler_name" {
 
 # Declare the script path in S3
 variable "script_s3_path" {
-  default = "s3://finalyelp201231011/scripts/glue_job.py"
+  default = "s3://finalyelp201231011/scripts/etl.py"
 }
