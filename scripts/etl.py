@@ -101,3 +101,4 @@ final_df.coalesce(1) \
 
 # End Glue job
 job.commit()
+
