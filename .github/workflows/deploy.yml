@@ -3,7 +3,7 @@ name: Terraform + ETL Automation
 on:
   push:
     branches:
-      - main
+      - feature/karan
 
 jobs:
   infra-etl:
