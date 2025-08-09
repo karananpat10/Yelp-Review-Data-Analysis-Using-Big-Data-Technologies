@@ -3,10 +3,10 @@ Designed a scalable data pipeline using AWS S3, Glue, EMR, and PySpark to proces
 
 
 #Objectives:
-1.	Analyze Yelp business, user, and review data to extract useful insights.
-2.	Build a recommendation system to suggest relevant businesses to users.
-3.	Predict user ratings for businesses using machine learning models.
-4.	Evaluate model performance using metrics like RMSE and MAE.
+1.Automate the ingestion, cleaning, transformation, and storage of Yelp’s raw datasets using scalable big data technologies.
+2.Integrate AWS Glue, Athena, and S3 for efficient ETL processing and serverless data querying.
+3.Perform advanced analytics to uncover trends, sentiment patterns, and geographic insights.
+4.Deliver interactive, real-time dashboards for stakeholders to explore KPIs and make data-driven decisions.
 
 #Dataset Description:
 The Yelp dataset contains a wealth of information, including:
