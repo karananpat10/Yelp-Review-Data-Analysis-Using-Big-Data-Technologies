@@ -69,6 +69,6 @@ jobs:
             sleep 30
           done
 
-      # Step 10: Start AWS Glue crawler
+      # Step 10: Start AWS Glue crawler.
       - name: Start Glue Crawler
         run: aws glue start-crawler --name yelpcrawlers12
