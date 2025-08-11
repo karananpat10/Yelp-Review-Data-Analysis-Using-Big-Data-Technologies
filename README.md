@@ -3,6 +3,7 @@ Designed a scalable data pipeline using AWS S3, Glue, EMR, and PySpark to proces
 
 
 #Objectives:
+
 1.Automate the ingestion, cleaning, transformation, and storage of Yelp’s raw datasets using scalable big data technologies.
 
 2.Integrate AWS Glue, Athena, and S3 for efficient ETL processing and serverless data querying.
@@ -12,6 +13,7 @@ Designed a scalable data pipeline using AWS S3, Glue, EMR, and PySpark to proces
 4.Deliver interactive, real-time dashboards for stakeholders to explore KPIs and make data-driven decisions.
 
 #Dataset Description:
+
 The Yelp dataset contains a wealth of information, including
 
 •	Business data: name, location, category, average rating
