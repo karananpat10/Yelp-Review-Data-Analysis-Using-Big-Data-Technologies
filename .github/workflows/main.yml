@@ -23,6 +23,21 @@ jobs:
         aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
         aws-region: us-east-1
 
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+
+    - name: Terraform Init
+      working-directory: infra
+      run: terraform init
+
+    - name: Terraform Validate
+      working-directory: infra
+      run: terraform validate
+
+    - name: Terraform Apply
+      working-directory: infra
+      run: terraform apply -auto-approve
+
     - name: Upload ETL script to S3
       run: |
         aws s3 cp CDAC-etl-pipeline/cdac-etl-script.py s3://cdac-copy-script-to-s3/script/cdac-etl-script.py

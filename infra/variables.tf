@@ -21,5 +21,5 @@ variable "glue_crawler_name" {
 
 #declare a script path
 variable "script_s3_path" {
-  default = "s3://cdac-automation-bucket627/scripts/my-etl-script.py"
+  default = "s3://cdac-automation-bucket627/scripts/cdac-etl-script.py"
 }
