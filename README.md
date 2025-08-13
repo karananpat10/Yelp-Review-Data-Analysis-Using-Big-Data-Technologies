@@ -77,7 +77,3 @@ Analyze the Yelp dataset to identify trends in customer reviews, business perfor
 
 ---
 
-## 🚀 How to Run the Project
-1. Clone the repository  
-```bash
-git clone https://github.com/your-username/your-repo-name.git
