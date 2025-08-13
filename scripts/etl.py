@@ -23,7 +23,7 @@ review_path = "s3://yelp-project123/project_json/yelp_academic_dataset_review.js
 user_path = "s3://yelp-project123/project_json/yelp_academic_dataset_user.json"
 
 # Output path as requested to save the final Parquet data
-output_path = "s3://yelp-project123/final_data/final_parq/"
+output_path = "s3://glue-file-1/final-output/"
 
 # Read the raw JSON datasets directly into Spark DataFrames
 # This avoids the redundant read-write cycle in the original script.
