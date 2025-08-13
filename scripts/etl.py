@@ -10,7 +10,7 @@ from pyspark.sql.types import StringType
 # Get job args
 args = getResolvedOptions(sys.argv, ['JOB_NAME'])
 
-# Initialize Glue context
+# Initialize Glue context.
 sc = SparkContext()
 glueContext = GlueContext(sc)
 spark = glueContext.spark_session
