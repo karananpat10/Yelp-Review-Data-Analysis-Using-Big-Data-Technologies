@@ -78,5 +78,7 @@ Analyze the Yelp dataset to identify trends in customer reviews, business perfor
 ![architecture diagram](Yelp_Review_data_Analytics_Architecture_diagram.jpg)
 
 
+## Dashboard
 
+![Dashboard](Dashboard.png)
 
