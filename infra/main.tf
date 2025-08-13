@@ -1,33 +1,38 @@
-provider "aws" {
-  region = var.aws_region
+resource "aws_s3_bucket" "etl_bucket" {
+  bucket = var.bucket_name_prefix
 }
 
-resource "aws_s3_bucket" "output_bucket" {
-  bucket        = var.output_bucket_name
-  force_destroy = true
+resource "aws_glue_catalog_database" "etl_db" {
+  name = "cdac-final-yelp-db"
 }
 
-data "aws_caller_identity" "current" {}
+locals {
+  glue_role_arn = "arn:aws:iam::318794836714:role/LabRole"
+}
 
 resource "aws_glue_job" "etl_job" {
-  name     = "yelp-glue-etl"
-  role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/LabRole"
+  name     = var.glue_job_name
+  role_arn = local.glue_role_arn
 
   command {
-    name            = "glueetl"
-    script_location = "s3://firstterraformjob/script.py"
+    name            = "glueetl" # change not
+    script_location = var.script_s3_path
     python_version  = "3"
   }
 
-  default_arguments = {
-    "--TempDir"       = "s3://${aws_s3_bucket.output_bucket.bucket}/temp/"
-    "--job-language"  = "python"
-    "--input_bucket"  = "firstterraformjob"
-    "--output_bucket" = aws_s3_bucket.output_bucket.bucket
+  glue_version      = "4.0"
+  number_of_workers = 2
+  worker_type       = "G.1X"
+}
+
+resource "aws_glue_crawler" "etl_crawler" {
+  name          = var.glue_crawler_name
+  role          = local.glue_role_arn
+  database_name = aws_glue_catalog_database.etl_db.name
+
+  s3_target {
+    path = "s3://${var.bucket_name_prefix}/transformeddata/"
   }
 
-  glue_version       = "4.0"
-  number_of_workers  = 2
-  worker_type        = "G.1X"
-  max_retries        = 1
+  depends_on = [aws_glue_job.etl_job]
 }

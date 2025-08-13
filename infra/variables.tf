@@ -1,11 +1,25 @@
-variable "aws_region" {
-  description = "The AWS region to deploy resources in"
-  type        = string
-  default     = "us-east-1"  # You can change this to your preferred region
+#declare a region
+variable "region" {
+  default = "us-east-1"
 }
 
-variable "output_bucket_name" {
-  description = "S3 bucket name for storing cleaned/transformed output data"
-  type        = string
-  default     = "terraformoutputjob"
+#declare a bucket name
+variable "bucket_name_prefix" {
+  default = "cdac-automation-bucket627"
+}
+
+
+#declare a glue job name
+variable "glue_job_name" {
+  default = "cdac-glue-etl-job"
+}
+
+#declare a crawler name
+variable "glue_crawler_name" {
+  default = "cdac-etl-crawler1"
+}
+
+#declare a script path
+variable "script_s3_path" {
+  default = "s3://cdac-automation-bucket627/scripts/my-etl-script.py"
 }
