@@ -38,7 +38,7 @@ Analyze the Yelp dataset to identify trends in customer reviews, business perfor
 - **AWS Athena** – Serverless SQL querying  
 - **Power BI** – Interactive dashboards  
 - **GitHub Actions** – CI/CD automation  
-- **Terraform / CloudFormation** – Infrastructure as Code  
+- **Terraform** – Infrastructure as Code  
 - **Jupyter Notebook** – EDA and visualization  
 
 ---
