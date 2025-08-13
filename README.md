@@ -73,7 +73,13 @@ Analyze the Yelp dataset to identify trends in customer reviews, business perfor
 ---
 
 ## 🖼️ Architecture Diagram
-![Architecture Diagram]("Yelp Review data Analytics Architecture diagram.jpg")
+
+---
+
+If you rename your diagram file to remove spaces, it’s even better:
+
+```md
+![Architecture Diagram](Yelp_Review_Data_Analytics_Architecture_Diagram.jpg)
 
 ---
 
