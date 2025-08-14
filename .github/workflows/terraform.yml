@@ -1,0 +1,68 @@
+name: Terraform + ETL Automation
+#123456
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  infra-etl:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: ${{ secrets.REGION }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        
+        run: terraform init
+
+      - name: Terraform Validate
+        
+        run: terraform validate
+
+      - name: Terraform Apply
+        
+        run: terraform apply -auto-approve
+
+      - name: Upload ETL Script to S3
+        run: |
+          aws s3 cp glue_job.py s3://data20031203/scripts/glue_job.py
+          echo "ETL script uploaded to S3."
+
+      - name: Start Glue ETL Job
+        id: start_etl
+        run: |
+          JOB_RUN_ID=$(aws glue start-job-run --job-name yelpsdataglue12 --query 'JobRunId' --output text)
+          echo "ETL JobRunId: $JOB_RUN_ID"
+          echo "job_run_id=$JOB_RUN_ID" >> $GITHUB_OUTPUT
+
+      - name: Wait for ETL Job Completion
+        run: |
+          JOB_RUN_ID=${{ steps.start_etl.outputs.job_run_id }}
+          while true; do
+            STATUS=$(aws glue get-job-run --job-name yelpsdataglue12 --run-id "$JOB_RUN_ID" --query 'JobRun.JobRunState' --output text)
+            echo "Current ETL job status: $STATUS"
+            if [ "$STATUS" == "SUCCEEDED" ]; then
+              echo "ETL Job completed successfully."
+              break
+            elif [ "$STATUS" == "FAILED" ] || [ "$STATUS" == "STOPPED" ]; then
+              echo "ETL Job failed or stopped."
+              exit 1
+            fi
+            sleep 30
+          done
+
+      - name: Start Glue Crawler
+        run: aws glue start-crawler --name yelpdatacrawler2023

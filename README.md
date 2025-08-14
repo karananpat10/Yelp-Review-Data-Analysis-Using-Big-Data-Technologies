@@ -1,4 +1,9 @@
+
+# Yelp-Review-Data-Analysis-Using-Big-Data-Technologies
+Designed a scalable data pipeline using AWS S3, Glue, EMR, and PySpark to process Yelp's dataset. Transformed raw JSON to structured CSV, performed cleaning, EDA, and built a master dataset. Extracted insights on business/user behavior and visualized trends for data-driven decisions.
+
 # 📊 Yelp Review Data Analytics Using Big Data Technologies
+
 
 ## 📌 Project Overview
 This project analyzes the **Yelp Open Dataset** to uncover trends in customer reviews, business performance, and user engagement across multiple locations and categories.  
@@ -97,4 +102,8 @@ Santosh Satti Reddy
 Sanjana Dalvi
 
 Mrunmai Jawalekar
+
+=======
+# yelp-bigdata-analytics-cdac
+I worked on analyzing the Yelp Open Dataset to extract meaningful business insights. The project involved building an end-to-end data pipeline using PySpark, where I cleaned and transformed raw JSON data into structured formats, stored it in AWS S3, and performed queries to derive insights about businesses, user behavior, and review patterns.
 
