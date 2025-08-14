@@ -1,17 +1,101 @@
-# Yelp-Review-Data-Analysis-Using-Big-Data-Technologies
-Designed a scalable data pipeline using AWS S3, Glue, EMR, and PySpark to process Yelp's dataset. Transformed raw JSON to structured CSV, performed cleaning, EDA, and built a master dataset. Extracted insights on business/user behavior and visualized trends for data-driven decisions.
+# 📊 Yelp Review Data Analytics Using Big Data Technologies
+
+## 📌 Project Overview
+This project analyzes the **Yelp Open Dataset** to uncover trends in customer reviews, business performance, and user engagement across multiple locations and categories.  
+It implements a **Big Data analytics pipeline** using AWS services, PySpark, and Power BI to process, transform, and visualize insights from millions of records.
+
+---
+
+## 🎯 Problem Statement
+Analyze the Yelp dataset to identify trends in customer reviews, business performance, and user engagement across locations and categories, aiming to provide actionable insights through data exploration only.
+
+---
+
+## 🎯 Objectives
+1. Analyze the distribution of star ratings across businesses and categories.  
+2. Track review volume and rating trends over time.  
+3. Identify top-performing businesses based on ratings and number of reviews.  
+4. Compare customer engagement across different cities and business types.  
+5. Explore patterns in review behavior, such as review length and timing.
+
+---
+
+## 📂 Dataset Information
+**Source:** [Yelp Open Dataset](https://www.yelp.com/dataset)  
+**Files Used:**  
+- `business.json` → Business details (name, location, categories, attributes)  
+- `user.json` → User profiles and engagement metrics  
+- `review.json` → Review text, ratings, timestamps  
+- `checkin.json` → Check-in activity timestamps  
+- `tip.json` → Short tips and recommendations  
+
+---
+
+## 🛠️ Tools & Technologies
+- **AWS S3** – Data storage  
+- **AWS EMR + PySpark** – Distributed processing & transformations  
+- **AWS Glue** – ETL & Data Catalog  
+- **AWS Athena** – Serverless SQL querying  
+- **Power BI** – Interactive dashboards  
+- **GitHub Actions** – CI/CD automation  
+- **Terraform** – Infrastructure as Code  
+- **Jupyter Notebook** – EDA and visualization  
+
+---
+
+## 🔄 Methodology
+1. **Data Conversion** – Converted JSON datasets to CSV for efficient S3 storage and PySpark compatibility.  
+2. **Initial EDA** – Analyzed schema, nulls, duplicates; selected relevant datasets (user, review, business).  
+3. **Feature Selection** – Chose meaningful columns for analysis.  
+4. **Data Transformation** – Cleaned data, extracted year/month, grouped categories, joined datasets in PySpark.  
+5. **Master Table Creation** – Combined datasets into a single analytics-ready table.  
+6. **Final EDA** – Generated insights on top businesses, active users, sentiment trends.  
+7. **Visualization** – Connected Athena to Power BI for dashboards.  
+
+---
+
+## ⚙️ Automation & CI/CD
+- **GitHub Actions Workflow**  
+  - Uploads ETL scripts to S3  
+  - Triggers AWS Glue jobs & crawlers  
+  - Updates Data Catalog automatically  
+- **Terraform**  
+  - Creates S3 bucket, Glue resources, IAM roles  
+  - Deploys infrastructure in minutes  
+
+---
+
+## 📊 Results & Outcomes
+- Processed **millions of Yelp reviews** using PySpark on AWS EMR.  
+- Automated ETL reduced manual workload by **80%**.  
+- Built **interactive Power BI dashboards** for business insights.  
+
+---
+
+## 🖼 Architecture Diagram
 
 
-#Objectives:
-1.	Analyze Yelp business, user, and review data to extract useful insights.
-2.	Build a recommendation system to suggest relevant businesses to users.
-3.	Predict user ratings for businesses using machine learning models.
-4.	Evaluate model performance using metrics like RMSE and MAE.
+![architecture diagram](Yelp_Review_data_Analytics_Architecture_diagram.jpg)
 
-#Dataset Description:
-The Yelp dataset contains a wealth of information, including:
-•	Business data: name, location, category, average rating
-•	Review data: review text, user ID, business ID, stars (rating)
-•	User data: number of reviews, average rating, and more
+
+## Dashboard
+
+![Dashboard](Dashboard.png)
+
+## Team Members
+
+Karan Anpat
+
+Mayuri Kakde
+
+Yogeshwar Patil
+
+Tushar Nandurkar
+
+Santosh Satti Reddy
+
+Sanjana Dalvi
+
+Mrunmai Jawalekar
 
 Architecture Diagram("C:\Users\KARAN\Desktop\Group 2\CDAC Final Project\Yelp Review data Analytics Architecture diagram.jpg")
