@@ -1,8 +1,15 @@
+
+name: Terraform + ETL Automation
+on:
+  push:
+    branches:
+
 name: Deploy Glue Job
 on:
   push:
     branches:
       - main
+
       - feature/karan
 
 jobs:
