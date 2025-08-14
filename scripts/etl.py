@@ -22,9 +22,6 @@ business_path = "s3://yelp-project123/project_json/yelp_academic_dataset_busines
 review_path = "s3://yelp-project123/project_json/yelp_academic_dataset_review.json"
 user_path = "s3://yelp-project123/project_json/yelp_academic_dataset_user.json"
 
-# Output path as requested to save the final Parquet data
-output_path = "s3://glue-file-1/final-output/"
-
 # Read the raw JSON datasets directly into Spark DataFrames
 # This avoids the redundant read-write cycle in the original script.
 b_df = spark.read.json(business_path)
@@ -130,6 +127,9 @@ final_df = final_df.withColumn("year", year("r_date")) \
 # Convert the final DataFrame to a DynamicFrame for writing to the S3 sink
 final_dyf = DynamicFrame.fromDF(final_df, glueContext, "final_dyf")
 
+# Output path as requested to save the final Parquet data
+output_path = "s3://glue-file-1/final-output/"
+
 # Write the final DynamicFrame to the specified S3 path in Parquet format
 glueContext.write_dynamic_frame.from_options(
     frame=final_dyf,
@@ -144,3 +144,4 @@ glueContext.write_dynamic_frame.from_options(
 
 # Commit the Glue job to finalize the run
 job.commit()
+
