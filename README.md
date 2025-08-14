@@ -98,4 +98,3 @@ Sanjana Dalvi
 
 Mrunmai Jawalekar
 
-Architecture Diagram("C:\Users\KARAN\Desktop\Group 2\CDAC Final Project\Yelp Review data Analytics Architecture diagram.jpg")
