@@ -82,3 +82,13 @@ Analyze the Yelp dataset to identify trends in customer reviews, business perfor
 
 ![Dashboard](Dashboard.png)
 
+## Team Members
+
+Karan Anpat
+Mayuri Kakde
+Yogeshwar Patil
+Tushar Nandurkar
+Santosh Satti Reddy
+Sanjana Dalvi
+Mrunmai Jawalekar
+
