@@ -93,7 +93,7 @@ Yogeshwar Patil
 
 Tushar Nandurkar
 
-Santosh Satti Reddy
+Satti Santhosh  Reddy
 
 Sanjana Dalvi
 
